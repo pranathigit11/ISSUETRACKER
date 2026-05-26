@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./App.css";
 import Dashboard from "./Dashboard";
 import IssueDetail from "./IssueDetail";
+import Team from "./Team";
+import Profile from "./Profile";
 
 const initialIssues = [
   { id: 1, title: "Fix login authentication bug", desc: "Users are unable to login with correct credentials", status: "In Progress", priority: "High", assignee: "Alex Johnson", initials: "AJ", color: "#4F6EF7", due: "2026-05-28" },
@@ -237,31 +239,11 @@ export default function App() {
           </main>
         )}
 
-        {/* Team Page */}
-        {activeNav === "Team" && !selectedIssue && (
-          <main className="content">
-            <div className="page-header">
-              <h1 className="page-title">Team</h1>
-              <p className="page-sub">Manage your team members</p>
-            </div>
-            <div style={{ background: "white", border: "1px solid #E5E7EB", borderRadius: 10, padding: 48, textAlign: "center", color: "#6B7280" }}>
-              Team page coming soon!
-            </div>
-          </main>
-        )}
+        {/* ✅ Team Page */}
+        {activeNav === "Team" && !selectedIssue && <Team />}
 
-        {/* Profile Page */}
-        {activeNav === "Profile" && !selectedIssue && (
-          <main className="content">
-            <div className="page-header">
-              <h1 className="page-title">Profile</h1>
-              <p className="page-sub">Manage your account settings</p>
-            </div>
-            <div style={{ background: "white", border: "1px solid #E5E7EB", borderRadius: 10, padding: 48, textAlign: "center", color: "#6B7280" }}>
-              Profile page coming soon!
-            </div>
-          </main>
-        )}
+        {/* ✅ Profile Page */}
+        {activeNav === "Profile" && !selectedIssue && <Profile />}
 
       </div>
 
