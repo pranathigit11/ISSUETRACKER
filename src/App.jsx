@@ -1,4 +1,4 @@
-`import { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Dashboard from "./Dashboard";
 import IssueDetail from "./IssueDetail";
@@ -92,7 +92,7 @@ export default function App() {
           {navItems.map(item => (
             <button
               key={item.label}
-              className={`nav-item ${activeNav === item.label ? "active" : ""}`}
+              className={"nav-item" + (activeNav === item.label ? " active" : "")}
               onClick={() => { setActiveNav(item.label); setSelectedIssue(null); }}
             >
               <span className="nav-icon">{item.icon}</span>
@@ -318,4 +318,4 @@ export default function App() {
 
     </div>
   );
-}`````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+}
