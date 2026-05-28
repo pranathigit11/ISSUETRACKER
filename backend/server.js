@@ -1,11 +1,29 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const cors = require("cors");
+
+dotenv.config();
 
 const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+mongoose.connect(process.env.MONGO_URI)
+.then(() => {
+    console.log("MongoDB Connected");
+})
+.catch((err) => {
+    console.log(err);
+});
 
 app.get("/", (req, res) => {
     res.send("Backend Running");
 });
 
-app.listen(8080, () => {
-    console.log("Server Running on 8080...");
+const PORT = 8080;
+
+app.listen(PORT, () => {
+    console.log(`Server running on ${PORT}`);
 });
