@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary: #3b6ef8;
+  --primary-hover: #2d5ce0;
+  --primary-light: #eff4ff;
+  --sidebar-bg: #ffffff;
+  --sidebar-width: 220px;
+  --topbar-height: 60px;
+  --bg: #f5f6fa;
+  --bg-white: #ffffff;
+  --border: #e8eaed;
+  --text-primary: #1a1d23;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --font: 'Inter', sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+
+  /* status */
+  --open-color: #3b82f6;
+  --open-bg: #e8f0fe;
+  --progress-color: #f59e0b;
+  --progress-bg: #fef3c7;
+  --completed-color: #22c55e;
+  --completed-bg: #dcfce7;
+  --closed-color: #6b7280;
+  --closed-bg: #f3f4f6;
+
+  /* priority */
+  --high-color: #ef4444;
+  --high-bg: #fee2e2;
+  --medium-color: #f59e0b;
+  --medium-bg: #fef3c7;
+  --low-color: #3b82f6;
+  --low-bg: #e8f0fe;
+  --critical-color: #7c3aed;
+  --critical-bg: #ede9fe;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+input, textarea, select { font-family: var(--font); }
