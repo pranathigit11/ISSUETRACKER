@@ -1,5 +1,6 @@
-const BASE = '/api/issues'
-const TEAM_BASE = '/api/team'
+const API_URL = import.meta.env.VITE_API_URL || '';
+const BASE = `${API_URL}/api/issues`;
+const TEAM_BASE = `${API_URL}/api/team`;
 
 // Issues
 export async function fetchStats() {
