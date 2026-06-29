@@ -1,94 +1,77 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const cors = require("cors");
+// // server.js
+// import dns from "node:dns"; // or: const dns = require("node:dns");
+// dns.setServers(["1.1.1.1", "8.8.8.8"]); // Cloudflare and Google DNS
 
-const Issue = require("./models/Issue");
+// // Now import the rest of your modules
+// import mongoose from "mongoose";
+// import dotenv from "dotenv";
+// // ... rest of your importsCopied!   
 
-dotenv.config();
+
+// const express = require('express')
+// const mongoose = require('mongoose')
+// const cors = require('cors')
+// require('dotenv').config()
+
+// const issueRoutes = require('./routes/issueRoutes')
+// const teamRoutes = require('./routes/teamRoutes')
+
+// const app = express()
+// app.use(cors())
+// app.use(express.json())
+
+// app.use('/api/issues', issueRoutes)
+// app.use('/api/team', teamRoutes)
+
+// app.get('/', (req, res) => res.json({ message: 'Issue Tracker API running' }))
+
+// mongoose
+//   .connect(process.env.MONGO_URI)
+//   .then(() => {
+//     console.log('✅ Connected to MongoDB')
+//     app.listen(process.env.PORT, () =>
+//       console.log(`🚀 Server running on http://localhost:${process.env.PORT}`)
+//     )
+//   })
+//   .catch((err) => {
+//     console.error('❌ MongoDB error:', err.message)
+//     process.exit(1)
+//   })
+
+// 1. Load 'dns' module FIRST and set servers BEFORE connecting to MongoDB
+const dns = require('node:dns');
+dns.setServers(['1.1.1.1', '8.8.8.8']); // Force public DNS to fix SRV lookup
+
+// 2. Rest of your CommonJS imports
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
+
+const issueRoutes = require('./routes/issueRoutes');
+const teamRoutes = require('./routes/teamRoutes');
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-    console.log("MongoDB Connected");
-})
-.catch((err) => {
-    console.log(err);
-});
+app.use('/api/issues', issueRoutes);
+app.use('/api/team', teamRoutes);
 
-app.get("/", (req, res) => {
-    res.send("Backend Running");
-});
+app.get('/', (req, res) => res.json({ message: 'Issue Tracker API running' }));
 
+// 3. Connect to MongoDB
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('✅ Connected to MongoDB');
+    const PORT = process.env.PORT || 5000;
 
-// CREATE ISSUE
-app.post("/issues", async (req, res) => {
-    try {
-        const issue = await Issue.create(req.body);
-        res.status(201).json(issue);
-    } catch (error) {
-        res.status(500).json({
-            error: error.message
-        });
-    }
-});
-
-
-// READ ALL ISSUES
-app.get("/issues", async (req, res) => {
-    try {
-        const issues = await Issue.find();
-        res.json(issues);
-    } catch (error) {
-        res.status(500).json({
-            error: error.message
-        });
-    }
-});
-
-
-// UPDATE ISSUE
-app.put("/issues/:id", async (req, res) => {
-    try {
-        const updatedIssue = await Issue.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true }
-        );
-
-        res.json(updatedIssue);
-
-    } catch (error) {
-        res.status(500).json({
-            error: error.message
-        });
-    }
-});
-
-
-// DELETE ISSUE
-app.delete("/issues/:id", async (req, res) => {
-    try {
-        await Issue.findByIdAndDelete(req.params.id);
-
-        res.json({
-            message: "Issue deleted successfully"
-        });
-
-    } catch (error) {
-        res.status(500).json({
-            error: error.message
-        });
-    }
-});
-
-
-const PORT = 8080;
-
-app.listen(PORT, () => {
-    console.log(`Server running on ${PORT}`);
-});
+app.listen(PORT, () =>
+  console.log(`🚀 Server running on port ${PORT}`)
+);
+  })
+  .catch((err) => {
+    console.error('❌ MongoDB error:', err.message);
+    process.exit(1);
+  });   
